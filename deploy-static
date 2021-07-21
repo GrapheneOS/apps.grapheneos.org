@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -o errexit -o nounset -o pipefail
+
+./process-static
+
+remote=root@apps.grapheneos.org
+active=$(ssh $remote readlink /srv/apps.grapheneos.org)
+
+if [[ $active = /srv/apps.grapheneos.org_a ]]; then
+    target=/srv/apps.grapheneos.org_b
+else
+    target=/srv/apps.grapheneos.org_a
+fi
+
+echo active is $active
+echo target is $target
+echo
+
+ssh $remote rm -rf $target
+ssh $remote cp -a $active $target
+rsync -rpcv --chmod=D755,F644 --delete apps-tmp/ $remote:$target
+ssh $remote sync -f $target
+ssh $remote ln -snf $target /srv/apps.grapheneos.org
+ssh $remote sync .
+
+cp nginx/nginx.conf nginx.conf.tmp
+sed -i "s|/srv/apps.grapheneos.org|$target|" nginx.conf.tmp
+rsync -rpcv --chmod=D755,F644 --delete nginx.conf.tmp $remote:/etc/nginx/nginx.conf
+ssh $remote sync -f /etc/nginx/nginx.conf
+ssh $remote nginx -s reload
+
+echo
+echo active is now $target

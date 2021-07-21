@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o errexit -o nounset -o pipefail
+
+rm -rf apps-tmp
+cp -a apps apps-tmp
+
+find apps-tmp -regex '.+\.\(json\|apk\)' \
+    -exec zopfli {} \; -exec touch -r {} {}.gz \; \
+    -exec brotli -k {} \;
