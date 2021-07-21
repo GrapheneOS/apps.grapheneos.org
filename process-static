@@ -6,4 +6,4 @@ rm -rf apps-tmp
 cp -a apps apps-tmp
 
 find apps-tmp -regex '.+\.\(json\|apk\)' |
-    parallel "brotli -k {}; zopfli {} && touch -r {} {}.gz"
+    parallel "brotli -k {}; zopfli {}"
