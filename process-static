@@ -2,13 +2,14 @@
 
 set -o errexit -o nounset -o pipefail
 
-rm -rf apps-tmp
-cp -a apps apps-tmp
+rm -rf static-tmp
+cp -a static static-tmp
+cp -a apps/* static-tmp
 
 brotli_k() {
     brotli -k "$@"
 }
 export -f brotli_k
 
-find apps-tmp -regex '.+\.\(json\|apk\)' |
+find static-tmp -regex '.+\.\(json\|apk\)' |
     parallel -q ::: brotli_k zopfli :::: -
