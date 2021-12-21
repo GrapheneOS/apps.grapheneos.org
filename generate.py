@@ -18,7 +18,7 @@ shutil.copy("apps.0.pub", "apps")
 apps = {}
 
 for app_id in os.listdir(top):
-    metadata = {"packages": [], "hashes": []}
+    metadata = {"appName": "", "versionCode": -1, "packages": [], "hashes": []}
     apps[app_id] = {"stable": metadata}
 
     src_dir = os.path.join(top, app_id)
@@ -34,6 +34,22 @@ for app_id in os.listdir(top):
         if kv.startswith("versionCode"):
             version_code = int(kv.split("=")[1])
             metadata["versionCode"] = version_code
+    
+    lines = badging.split(b"\n")
+    app_name = ""
+    for line in lines:
+        line = line.decode()
+        if (line.startswith("application-label")):
+            # Do not include the "\'" marks around the app label
+            app_name = line.split(":")[1][1:-1]
+            break
+        else:
+            continue
+    if (app_name == ""):
+        if (app_id == "com.google.android.gms"):
+            app_name = "Google Play Services"
+        # Insert here new apks without application-label
+    metadata["appName"] = app_name
 
     app_dir = os.path.join("apps", "packages", app_id, str(version_code))
     if len(src_packages) == 1:
