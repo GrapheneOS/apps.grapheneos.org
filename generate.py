@@ -18,7 +18,7 @@ shutil.copy("apps.0.pub", "apps")
 apps = {}
 
 for app_id in os.listdir(top):
-    metadata = {"packages": [], "hashes": []}
+    metadata = {"label": "", "versionCode": -1, "packages": [], "hashes": []}
     apps[app_id] = {"stable": metadata}
 
     src_dir = os.path.join(top, app_id)
@@ -28,12 +28,19 @@ for app_id in os.listdir(top):
     else:
         base_apk = "base.apk"
 
-    badging = subprocess.check_output(["aapt2", "dump", "badging", os.path.join(src_dir, base_apk)])
-    line = badging.split(b"\n")[0]
-    for kv in shlex.split(line.decode()):
+    badging = subprocess.check_output(["aapt", "dump", "badging", os.path.join(src_dir, base_apk)])
+    lines = badging.split(b"\n")
+
+    for kv in shlex.split(lines[0].decode()):
         if kv.startswith("versionCode"):
             version_code = int(kv.split("=")[1])
             metadata["versionCode"] = version_code
+
+    for line in lines[1:-1]:
+        kv = shlex.split(line.decode())
+        if kv[0].startswith("application-label:"):
+            metadata["label"] = kv[0].split(":")[1]
+            break
 
     app_dir = os.path.join("apps", "packages", app_id, str(version_code))
     if len(src_packages) == 1:
