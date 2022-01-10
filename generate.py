@@ -18,7 +18,7 @@ shutil.copy("apps.0.pub", "apps")
 apps = {}
 
 for app_id in os.listdir(top):
-    metadata = {"label": "", "versionCode": -1, "packages": [], "hashes": []}
+    metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
     apps[app_id] = {"stable": metadata}
 
     src_dir = os.path.join(top, app_id)
@@ -40,7 +40,13 @@ for app_id in os.listdir(top):
         kv = shlex.split(line.decode())
         if kv[0].startswith("application-label:"):
             metadata["label"] = kv[0].split(":")[1]
-            break
+        elif kv[0].startswith("uses-static-library:"):
+            metadata["dependencies"].append(kv[1].split("=")[1])
+
+    if app_id == "com.google.android.gms":
+        metadata["dependencies"] = ["com.google.android.gsf"]
+    elif app_id == "com.android.vending":
+        metadata["dependencies"] = ["com.google.android.gsf", "com.google.android.gms"]
 
     app_dir = os.path.join("apps", "packages", app_id, str(version_code))
     if len(src_packages) == 1:
