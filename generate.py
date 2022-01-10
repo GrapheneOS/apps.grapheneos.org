@@ -18,7 +18,7 @@ shutil.copy("apps.0.pub", "apps")
 apps = {}
 
 for app_id in os.listdir(top):
-    metadata = {"label": "", "versionCode": -1, "packages": [], "hashes": []}
+    metadata = {"label": "", "versionCode": -1, "depends-on": [], "packages": [], "hashes": []}
     apps[app_id] = {"stable": metadata}
 
     src_dir = os.path.join(top, app_id)
@@ -28,7 +28,10 @@ for app_id in os.listdir(top):
     else:
         base_apk = "base.apk"
 
-    badging = subprocess.check_output(["aapt", "dump", "badging", os.path.join(src_dir, base_apk)])
+    aapt_to_use = "aapt2"
+    if (app_id == "com.google.android.gms"):
+        aapt_to_use = "aapt"
+    badging = subprocess.check_output([aapt_to_use, "dump", "badging", os.path.join(src_dir, base_apk)])
     lines = badging.split(b"\n")
 
     for kv in shlex.split(lines[0].decode()):
@@ -40,7 +43,14 @@ for app_id in os.listdir(top):
         kv = shlex.split(line.decode())
         if kv[0].startswith("application-label:"):
             metadata["label"] = kv[0].split(":")[1]
-            break
+        elif kv[0].startswith("uses-static-library:"):
+            metadata["depends-on"].append(kv[1].split("=")[1])
+            break # This portion appears later than the application-label
+
+    if (app_id == "com.google.android.gms"):
+        metadata["depends-on"] = ["com.google.android.gsf"]
+    elif (app_id == "com.android.vending"):
+        metadata["depends-on"] = ["com.google.android.gsf", "com.google.android.gms"]
 
     app_dir = os.path.join("apps", "packages", app_id, str(version_code))
     if len(src_packages) == 1:
