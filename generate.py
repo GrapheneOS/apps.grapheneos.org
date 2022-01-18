@@ -72,7 +72,7 @@ metadata = {
     "apps": apps
 }
 
-with open("apps/metadata.json", "w") as f:
+with open("apps/metadata.0.json", "w") as f:
     json.dump(metadata, f, separators=(',', ':'))
 
-subprocess.check_output(["signify", "-S", "-s", "apps.0.sec", "-m", "apps/metadata.json", "-x", "apps/metadata.json.0.sig"])
+subprocess.check_output(["signify", "-S", "-s", "apps.0.sec", "-m", "apps/metadata.0.json", "-x", "apps/metadata.0.json.0.sig"])
