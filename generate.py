@@ -65,7 +65,7 @@ for channel in channels:
             metadata["hashes"].append(h.hexdigest())
             metadata["packages"].append(package)
 
-        apps.setdefault(app_id, {})[channel] = metadata
+        apps.setdefault(app_id, {}).setdefault(channel, []).append(metadata)
 
 metadata = {
     "time": int(datetime.datetime.utcnow().timestamp()),
