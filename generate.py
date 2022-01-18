@@ -43,6 +43,8 @@ for channel in channels:
                 metadata["label"] = kv[0].split(":")[1]
             elif kv[0].startswith("uses-static-library:"):
                 metadata["dependencies"].append(kv[1].split("=")[1])
+            elif kv[0].startswith("sdkVersion"):
+                metadata["minSdkVersion"] = int(kv[0].split(":")[1])
 
         if app_id == "com.google.android.gms":
             metadata["dependencies"] = ["com.google.android.gsf"]
