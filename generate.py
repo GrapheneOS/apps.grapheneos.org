@@ -15,7 +15,7 @@ shutil.rmtree("apps", ignore_errors=True)
 os.mkdir("apps")
 shutil.copy("apps.0.pub", "apps")
 
-apps = {}
+apps = {"com.google.android.gsf": {}, "com.google.android.gms": {}, "com.android.vending": {}}
 
 for channel in channels:
     top = "apps-" + channel
