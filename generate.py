@@ -19,6 +19,8 @@ apps = {}
 
 for channel in channels:
     top = "apps-" + channel
+    if not os.path.isdir(top):
+        top = "apps-stable"
     for app_id in os.listdir(top):
         metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
 
@@ -52,11 +54,12 @@ for channel in channels:
             metadata["dependencies"] = ["com.google.android.gsf", "com.google.android.gms"]
 
         app_dir = os.path.join("apps", "packages", app_id, str(version_code))
-        if len(src_packages) == 1:
-            os.makedirs(app_dir)
-            shutil.copyfile(os.path.join(src_dir, base_apk), os.path.join(app_dir, "base.apk"))
-        else:
-            shutil.copytree(src_dir, app_dir)
+        if not os.path.isdir(app_dir):
+            if len(src_packages) == 1:
+                os.makedirs(app_dir)
+                shutil.copyfile(os.path.join(src_dir, base_apk), os.path.join(app_dir, "base.apk"))
+            else:
+                shutil.copytree(src_dir, app_dir)
 
         for package in os.listdir(app_dir):
             h = hashlib.new("sha256")
