@@ -17,5 +17,5 @@ zopfli_preserve_time() {
 }
 export -f zopfli_preserve_time
 
-find static-tmp -regex '.+\.\(json\|apk\)' |
+find static-tmp -regex '.+\.\(apk\|ico\|json\|svg\)' |
     parallel -q ::: brotli_k zopfli_preserve_time :::: -
