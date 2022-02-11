@@ -20,7 +20,7 @@ apps = {}
 for channel in channels:
     top = "apps-" + channel
     for app_id in os.listdir(top):
-        metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
+        metadata = {"label": "", "versionCode": -1, "size" : -1, "dependencies": [], "packages": [], "hashes": []}
 
         src_dir = os.path.join(top, app_id)
         src_packages = os.listdir(src_dir)
@@ -29,6 +29,11 @@ for channel in channels:
         else:
             base_apk = "base.apk"
 
+        size = 0
+        for apk in src_packages:
+            size = size + os.stat(os.path.join(src_dir, apk)).st_size
+
+        metadata["size"] = size
         badging = subprocess.check_output(["aapt", "dump", "badging", os.path.join(src_dir, base_apk)])
         lines = badging.split(b"\n")
 
