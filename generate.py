@@ -51,6 +51,9 @@ for channel in channels:
         elif app_id == "com.android.vending":
             metadata["dependencies"] = ["com.google.android.gsf", "com.google.android.gms"]
 
+        if app_id == "app.grapheneos.pdfviewer":
+            metadata["originalPackage"] = "org.grapheneos.pdfviewer"
+
         app_dir = os.path.join("apps", "packages", app_id, str(version_code))
         if len(src_packages) == 1:
             os.makedirs(app_dir)
