@@ -55,11 +55,12 @@ for channel in channels:
             metadata["originalPackage"] = "org.grapheneos.pdfviewer"
 
         app_dir = os.path.join("apps", "packages", app_id, str(version_code))
-        if len(src_packages) == 1:
-            os.makedirs(app_dir)
-            shutil.copyfile(os.path.join(src_dir, base_apk), os.path.join(app_dir, "base.apk"))
-        else:
-            shutil.copytree(src_dir, app_dir)
+        if not os.path.isdir(app_dir):
+            if len(src_packages) == 1:
+                os.makedirs(app_dir)
+                shutil.copyfile(os.path.join(src_dir, base_apk), os.path.join(app_dir, "base.apk"))
+            else:
+                shutil.copytree(src_dir, app_dir)
 
         for package in os.listdir(app_dir):
             h = hashlib.new("sha256")
