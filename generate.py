@@ -10,6 +10,7 @@ import subprocess
 from pathlib import Path
 
 channels = "stable", "beta"
+mirrored_google_apps = "com.google.android.gsf", "com.google.android.gms", "com.android.vending"
 
 shutil.rmtree("apps", ignore_errors=True)
 os.mkdir("apps")
@@ -53,6 +54,11 @@ for channel in channels:
 
         if app_id == "app.grapheneos.pdfviewer":
             metadata["originalPackage"] = "org.grapheneos.pdfviewer"
+
+        if app_id in mirrored_google_apps:
+            metadata["source"] = "Google"
+        elif app_id.startswith(("app.grapheneos.", "app.attestation.")):
+            metadata["source"] = "GrapheneOS"
 
         app_dir = os.path.join("apps", "packages", app_id, str(version_code))
         if not os.path.isdir(app_dir):
