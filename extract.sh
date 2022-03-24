@@ -11,7 +11,8 @@ cd extracted-apps
 
 for app in ${APPS[@]}; do
     mkdir $app
-    for package in $(adb shell pm path $app); do
+    paths=$(adb shell pm path $app)
+    for package in $paths; do
         adb pull ${package#package:} $app/
     done
 done
