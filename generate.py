@@ -11,7 +11,8 @@ from pathlib import Path
 
 channels = "stable", "beta"
 
-shutil.rmtree("apps", ignore_errors=True)
+shutil.rmtree("apps-old", ignore_errors=True)
+shutil.move("apps", "apps-old")
 os.mkdir("apps")
 shutil.copy("apps.0.pub", "apps")
 
