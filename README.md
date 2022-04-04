@@ -43,3 +43,9 @@ The following describes the procedure to create a custom apps repository running
 ### Updating your repo
 
 Follow steps 5 + 6
+
+# Third party tools
+
+The following tools are not part of the GrapheneOS project and are not being reviewed by us. Use them at your own risk.
+
+- UI for managing a GrapheneOS repo: [GRM](https://github.com/sfX-android/GRM)
