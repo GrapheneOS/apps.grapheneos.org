@@ -9,7 +9,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-channels = "stable", "beta"
+channels = "stable", "beta", "alpha"
 
 shutil.rmtree("apps-old", ignore_errors=True)
 shutil.move("apps", "apps-old")
