@@ -30,7 +30,7 @@ for channel in channels:
         else:
             base_apk = "base.apk"
 
-        badging = subprocess.check_output(["aapt", "dump", "badging", os.path.join(src_dir, base_apk)])
+        badging = subprocess.check_output(["aapt2", "dump", "badging", os.path.join(src_dir, base_apk)])
         lines = badging.split(b"\n")
 
         for kv in shlex.split(lines[0].decode()):
