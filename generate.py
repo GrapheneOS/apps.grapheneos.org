@@ -20,10 +20,10 @@ apps = {}
 
 for channel in channels:
     top = "apps-" + channel
-    for app_id in sorted(os.listdir(top)):
+    for src in sorted(os.listdir(top)):
         metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
 
-        src_dir = os.path.join(top, app_id)
+        src_dir = os.path.join(top, src)
         src_packages = os.listdir(src_dir)
         if len(src_packages) == 1:
             base_apk = src_packages[0]
@@ -37,6 +37,8 @@ for channel in channels:
             if kv.startswith("versionCode"):
                 version_code = int(kv.split("=")[1])
                 metadata["versionCode"] = version_code
+            elif kv.startswith("name"):
+                app_id = kv.split("=")[1]
 
         for line in lines[1:-1]:
             kv = shlex.split(line.decode())
