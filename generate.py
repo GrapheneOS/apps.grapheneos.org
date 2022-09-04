@@ -20,7 +20,7 @@ apps = {}
 
 for channel in channels:
     top = "apps-" + channel
-    for app_id in os.listdir(top):
+    for app_id in sorted(os.listdir(top)):
         metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
 
         src_dir = os.path.join(top, app_id)
@@ -63,7 +63,7 @@ for channel in channels:
             else:
                 shutil.copytree(src_dir, app_dir)
 
-        for package in os.listdir(app_dir):
+        for package in sorted(os.listdir(app_dir)):
             h = hashlib.new("sha256")
             with open(os.path.join(app_dir, package), "rb") as f:
                 h.update(f.read())
