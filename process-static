@@ -18,11 +18,6 @@ rm -rf static-tmp
 cp -a static static-tmp
 cp -a apps/* static-tmp
 
-brotli_k() {
-    brotli -k "$@"
-}
-export -f brotli_k
-
 zopfli_preserve_time() {
     zopfli "$1"
     touch -r "$1" "$1.gz"
@@ -30,4 +25,4 @@ zopfli_preserve_time() {
 export -f zopfli_preserve_time
 
 find static-tmp -regex '.+\.\(apk\|ico\|json\|svg\)' |
-    parallel -q ::: brotli_k zopfli_preserve_time :::: -
+    parallel -q ::: brotli zopfli_preserve_time :::: -
