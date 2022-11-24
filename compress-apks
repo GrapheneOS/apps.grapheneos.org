@@ -1,0 +1,58 @@
+#!/bin/bash
+
+set -o errexit -o nounset -o pipefail
+
+if [[ $# -eq 1 ]]; then
+    fd=$1
+else
+    touch lock
+    exec {fd}< lock
+fi
+
+if ! flock -n $fd; then
+    echo already locked >&2
+    exit 1
+fi
+
+maybe_brotli() {
+    COMP="$1.br"
+    if [[ -f $COMP ]]; then
+        return
+    fi
+
+    TMP="$COMP.tmp"
+    rm -f $TMP
+
+    echo "brotli $1"
+    brotli --suffix=".br.tmp" "$1"
+
+    sync $TMP
+    mv $TMP $COMP
+    # fully preserve file times, brotli reduces precision of mtime to a second
+    touch -r "$1" $COMP
+}
+
+export -f maybe_brotli
+
+maybe_zopfli() {
+    COMP="$1.gz"
+    if [[ -f $COMP ]]; then
+        return
+    fi
+
+    TMP="$COMP.tmp"
+    rm -f $TMP
+
+    echo "zopfli $1"
+    zopfli -c "$1" > $TMP
+
+    sync $TMP
+    mv $TMP $COMP
+    # preserve file times
+    touch -r "$1" $COMP
+}
+
+export -f maybe_zopfli
+
+find "apps/packages" -regex '.+\.apk' |
+    parallel -q ::: maybe_brotli maybe_zopfli :::: -
