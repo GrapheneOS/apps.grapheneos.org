@@ -1,0 +1,13 @@
+signatures = ["6ebb65c5daa95641f7a774ea35d26ff251575cb32e34a8a5d655b2742b57321f"]
+source = "GrapheneOS"
+
+isTopLevel = false
+
+noCode = true
+packagesAllowedToTriggerUpdate = ["app.grapheneos.gmscompat"]
+
+staticDeps = ["app.grapheneos.gmscompat >= 1000"]
+
+description = """
+This is a configuration file for the sandboxed Google Play compatibility layer.
+"""

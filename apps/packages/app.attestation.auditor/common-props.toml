@@ -1,0 +1,6 @@
+signatures = ["990e04f0864b19f14f84e0e432f7a393f297ab105a22c1e1b10b442a4a62c42c"]
+source = "GrapheneOS"
+
+description = """
+The Auditor app uses hardware security features on supported devices to validate the integrity of the operating system from another Android device. It will verify that the device is running the stock operating system with the bootloader locked and that no tampering with the operating system has occurred. It will also detect downgrades to a previous version.
+"""
