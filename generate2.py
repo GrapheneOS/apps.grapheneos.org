@@ -84,10 +84,11 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             elif kv[0].startswith("sdkVersion"):
                 pkg_props["minSdk"] = int(kv[0].split(":")[1])
             elif kv[0].startswith("native-code"):
-                abi = kv[1]
-                assert abi in ["arm64-v8a", "x86_64", "armeabi-v7a", "x86"]
+                abis = kv[1:]
+                for abi in abis:
+                    assert abi in ["arm64-v8a", "x86_64", "armeabi-v7a", "x86"]
                 assert pkg_props.get("abis") == None
-                pkg_props["abis"] = [ abi ]
+                pkg_props["abis"] = abis
 
         assert pkg_props.get("minSdk") != None
 
