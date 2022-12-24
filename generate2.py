@@ -175,18 +175,29 @@ metadata = {
 
 metadata_prefix = "apps/metadata.1"
 metadata_json = metadata_prefix + ".json"
-metadata_json_sig = metadata_json + ".0.sig"
-metadata_sjson = metadata_prefix + ".sjson"
 
 with open(metadata_json, "w") as f:
     json.dump(metadata, f, separators=(',', ':'))
 
-subprocess.check_output(["signify", "-S", "-s", "apps.0.sec", "-m", metadata_json, "-x", metadata_json_sig])
+# sign metadata with all available key versions
+key_version = 0
+while True:
+    metadata_json_sig = metadata_json + "." + str(key_version) + ".sig"
 
-with open(metadata_json_sig) as f:
-    sig = f.read().splitlines()[1]
+    if not os.path.isfile(metadata_json_sig):
+        break
 
-shutil.copy(metadata_json, metadata_sjson)
+    metadata_sjson = metadata_prefix + "." + str(key_version) + ".sjson"
 
-with open(metadata_sjson, "a") as f:
-    f.write("\n" + sig + "\n")
+    subprocess.check_output(["signify", "-S", "-s", "apps.0.sec", "-m", metadata_json, "-x", metadata_json_sig])
+
+    with open(metadata_json_sig) as f:
+        sig = f.read().splitlines()[1]
+
+    shutil.copy(metadata_json, metadata_sjson)
+
+    with open(metadata_sjson, "a") as f:
+        f.write("\n" + sig + "\n")
+
+    key_version += 1
+
