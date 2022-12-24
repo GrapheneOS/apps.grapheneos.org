@@ -182,14 +182,15 @@ with open(metadata_json, "w") as f:
 # sign metadata with all available key versions
 key_version = 0
 while True:
-    metadata_json_sig = metadata_json + "." + str(key_version) + ".sig"
+    private_key = "apps." + str(key_version) + ".sec"
 
-    if not os.path.isfile(metadata_json_sig):
+    if not os.path.isfile(private_key):
         break
 
+    metadata_json_sig = metadata_json + "." + str(key_version) + ".sig"
     metadata_sjson = metadata_prefix + "." + str(key_version) + ".sjson"
 
-    subprocess.check_output(["signify", "-S", "-s", "apps.0.sec", "-m", metadata_json, "-x", metadata_json_sig])
+    subprocess.check_output(["signify", "-S", "-s", private_key, "-m", metadata_json, "-x", metadata_json_sig])
 
     with open(metadata_json_sig) as f:
         sig = f.read().splitlines()[1]
