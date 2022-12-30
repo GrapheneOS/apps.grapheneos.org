@@ -44,7 +44,7 @@ for channel in channels:
             elif kv[0].startswith("sdkVersion"):
                 metadata["minSdkVersion"] = int(kv[0].split(":")[1])
 
-        if src in ("com.android.vending.33", "com.google.android.gms.33", "app.grapheneos.apps.33"):
+        if src in ("com.android.vending.33", "com.google.android.gms.33"):
             metadata["minSdkVersion"] = 33
 
         if app_id == "com.google.android.gms":
