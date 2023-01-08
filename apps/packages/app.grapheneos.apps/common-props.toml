@@ -1,4 +1,2 @@
 signatures = ["3384c31fce4a7c008a8f7b2652bc48cc4321f1d2c877b18e30a4ed619af12f6b"]
 source = "GrapheneOS"
-
-isTopLevel = false
