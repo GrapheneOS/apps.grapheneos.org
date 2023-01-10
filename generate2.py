@@ -34,6 +34,15 @@ def load_signature(apk_path):
 
     return sig_hash
 
+all_abis = {"arm64-v8a", "x86_64", "armeabi-v7a", "x86"}
+# file name ABI qualifier replaces "-" with "_"
+abis_dict = {
+    "arm64_v8a": "arm64-v8a",
+    "x86_64": "x86_64",
+    "armeabi_v7a": "armeabi-v7a",
+    "x86": "x86",
+}
+
 assert subprocess.call("./compress-apks") == 0
 
 packages_dir = "apps/packages"
@@ -77,6 +86,8 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             elif kv.startswith("name"):
                 assert pkg_name == kv.split("=")[1]
 
+        pkg_abis = set()
+
         for line in lines[1:-1]:
             kv = shlex.split(line.decode())
             if kv[0].startswith("application-label:"):
@@ -86,9 +97,9 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             elif kv[0].startswith("native-code"):
                 abis = kv[1:]
                 for abi in abis:
-                    assert abi in ["arm64-v8a", "x86_64", "armeabi-v7a", "x86"]
-                assert pkg_props.get("abis") == None
-                pkg_props["abis"] = abis
+                    assert abi in all_abis
+                assert len(pkg_abis) == 0
+                pkg_abis.update(abis)
 
         assert pkg_props.get("minSdk") != None
 
@@ -143,13 +154,21 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             pkg_props["apkBrSizes"].append(int(os.path.getsize(apk_br_path)))
             pkg_props["apks"].append(apk_name)
 
+            name_parts = apk_name.split('.')
+            if len(name_parts) >= 3:
+                maybe_abi = name_parts[len(name_parts) - 2]
+                if maybe_abi in abis_dict:
+                    pkg_abis.add(abis_dict[maybe_abi])
+
+        if len(pkg_abis) != 0:
+            pkg_props["abis"] = list(pkg_abis)
+
         pkg_msg = "channel: " + pkg_props["channel"] + ", minSdk: " + str(pkg_props["minSdk"])
         maxSdk = pkg_props.get("maxSdk")
         if maxSdk != None:
             pkg_msg += ", maxSdk: " + maxSdk
-        abis = pkg_props.get("abis")
-        if abis != None:
-            pkg_msg += "\nabis: " + ", ".join(abis)
+        if len(pkg_abis) != 0:
+            pkg_msg += "\nabis: " + ", ".join(pkg_abis)
         staticDeps = pkg_props.get("staticDeps")
         if staticDeps != None:
             pkg_msg += "\nstaticDeps: " + ", ".join(staticDeps)
