@@ -97,22 +97,6 @@ for pkg_name in sorted(os.listdir(packages_dir)):
 
         assert pkg_props["channel"] in ["alpha", "beta", "stable", "old"]
 
-        pkg_msg = "channel: " + pkg_props["channel"] + ", minSdk: " + str(pkg_props["minSdk"])
-        maxSdk = pkg_props.get("maxSdk")
-        if maxSdk != None:
-            pkg_msg += ", maxSdk: " + maxSdk
-        abis = pkg_props.get("abis")
-        if abis != None:
-            pkg_msg += "\nabis: " + ", ".join(abis)
-        staticDeps = pkg_props.get("staticDeps")
-        if staticDeps != None:
-            pkg_msg += "\nstaticDeps: " + ", ".join(staticDeps)
-        deps = pkg_props.get("deps")
-        if deps != None:
-            pkg_msg += "\ndeps: " + ", ".join(deps)
-        pkg_msg += "\n"
-        print(pkg_msg)
-
         for apk_name in sorted(filter(lambda n: n.endswith(".apk"), os.listdir(pkg_path))):
             apk_path = os.path.join(pkg_path, apk_name)
 
@@ -158,6 +142,22 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             pkg_props["apkGzSizes"].append(int(os.path.getsize(apk_gz_path)))
             pkg_props["apkBrSizes"].append(int(os.path.getsize(apk_br_path)))
             pkg_props["apks"].append(apk_name)
+
+        pkg_msg = "channel: " + pkg_props["channel"] + ", minSdk: " + str(pkg_props["minSdk"])
+        maxSdk = pkg_props.get("maxSdk")
+        if maxSdk != None:
+            pkg_msg += ", maxSdk: " + maxSdk
+        abis = pkg_props.get("abis")
+        if abis != None:
+            pkg_msg += "\nabis: " + ", ".join(abis)
+        staticDeps = pkg_props.get("staticDeps")
+        if staticDeps != None:
+            pkg_msg += "\nstaticDeps: " + ", ".join(staticDeps)
+        deps = pkg_props.get("deps")
+        if deps != None:
+            pkg_msg += "\ndeps: " + ", ".join(deps)
+        pkg_msg += "\n"
+        print(pkg_msg)
 
         # "old" release channel is for previous version(s), to prevent clients from getting
         # 404 errors when updating packages
