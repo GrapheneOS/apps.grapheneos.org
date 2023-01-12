@@ -2,7 +2,6 @@ apps/packages/*/*/
 apps-alpha
 apps-beta
 apps-stable
-apps-old
 extracted-apps
 extracted-apps-old
 root_apps.grapheneos.org.conf
