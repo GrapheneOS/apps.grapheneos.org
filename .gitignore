@@ -1,4 +1,5 @@
-apps/packages/*/*/
+apps/packages/*/*/*
+!apps/packages/*/*/*.toml
 apps-alpha
 apps-beta
 apps-stable
