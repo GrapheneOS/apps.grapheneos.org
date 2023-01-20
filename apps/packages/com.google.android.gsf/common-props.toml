@@ -3,4 +3,4 @@ source = "Google"
 isTopLevel = false
 
 staticDeps = ["app.grapheneos.gmscompat >= 1000"]
-deps = ["app.grapheneos.gmscompat.config 25"]
+deps = ["app.grapheneos.gmscompat.config"]
