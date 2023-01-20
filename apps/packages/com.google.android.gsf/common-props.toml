@@ -2,5 +2,5 @@ signatures = ["7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053"
 source = "Google"
 isTopLevel = false
 
-staticDeps = ["app.grapheneos.gmscompat == 1000"]
+staticDeps = ["app.grapheneos.gmscompat >= 1000"]
 deps = ["app.grapheneos.gmscompat.config 25"]
