@@ -12,4 +12,7 @@ static-tmp
 *.sjson
 apps.0.pub
 apps.0.sec
+*.der
+*.pem
+*.fsv_sig
 lock
