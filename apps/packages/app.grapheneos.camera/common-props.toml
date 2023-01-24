@@ -1,5 +1,6 @@
 signatures = ["6436b155b917c2f9a9ed1d15c4993a5968ffabc94947c13f2aeee14b7b27ed59"]
 source = "GrapheneOS"
+hasFsVeritySignatures = true
 
 description = """
 A modern camera app focused on privacy and security. It includes modes for capturing images, videos and QR / barcode scanning along with additional modes based on CameraX vendor extensions (Portrait, HDR, Night, Face Retouch and Auto) on devices where they're available.

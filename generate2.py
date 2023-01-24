@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import base64
 import datetime
 import hashlib
 import json
@@ -188,9 +189,49 @@ for pkg_name in sorted(os.listdir(packages_dir)):
     common_props["variants"] = package_variants
     packages[pkg_name] = common_props
 
+
+fsverity_certs = {}
+
+fvc_version = 0
+while True:
+    fv_cert_der = "fsverity_cert." + str(fvc_version) + ".der"
+    fv_cert_pem = "fsverity_cert." + str(fvc_version) + ".pem"
+    fv_private_key = "fsverity_private_key." + str(fvc_version) + ".pem"
+
+    if not os.path.isfile(fv_cert_der):
+        break
+
+    for pkg_name, common_props in packages.items():
+        if "hasFsVeritySignatures" not in common_props:
+            continue
+        if not common_props["hasFsVeritySignatures"]:
+            continue
+
+        for pkg_version, pkg_props in common_props["variants"].items():
+            pkg_path = packages_dir + "/" + pkg_name + "/" + pkg_version
+            for apk in pkg_props["apks"]:
+                apk_path = pkg_path + "/" + apk
+                fsv_sig_path = apk_path + "." + str(fvc_version) + ".fsv_sig"
+
+                if os.path.isfile(fsv_sig_path):
+                    continue
+
+                subprocess.run([
+                    "fsverity", "sign",
+                    apk_path, fsv_sig_path,
+                    "--key=" + fv_private_key,
+                    "--cert=" + fv_cert_pem,
+                ]).check_returncode()
+
+    with open(fv_cert_der, "rb") as f:
+        fsverity_certs[str(fvc_version)] = base64.b64encode(f.read()).decode("utf-8")
+
+    fvc_version += 1
+
 metadata = {
     "time": int(datetime.datetime.utcnow().timestamp()),
-    "packages": packages
+    "packages": packages,
+    "fsVerityCerts": fsverity_certs,
 }
 
 metadata_prefix = "apps/metadata.1"
