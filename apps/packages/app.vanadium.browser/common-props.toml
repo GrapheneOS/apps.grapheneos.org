@@ -1,0 +1,6 @@
+signatures = ["c6adb8b83c6d4c17d292afde56fd488a51d316ff8f2c11c5410223bff8a7dbb3"]
+source = "GrapheneOS"
+group = "Vanadium"
+originalPackage = "org.chromium.chrome"
+deps = ["app.vanadium.trichromelibrary", "app.vanadium.webview"]
+staticDeps = ["app.vanadium.browser >= 541411800"]
