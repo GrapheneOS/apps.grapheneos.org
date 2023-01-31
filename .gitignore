@@ -16,3 +16,4 @@ apps.0.sec
 *.pem
 *.fsv_sig
 lock
+/download/
