@@ -5,4 +5,4 @@ group = "Vanadium"
 isTopLevel = false
 isSharedLibrary = true
 noIcon = true
-staticDeps = ["app.vanadium.browser >= 541411800"]
+staticDeps = ["app.vanadium.browser >= 548106100"]

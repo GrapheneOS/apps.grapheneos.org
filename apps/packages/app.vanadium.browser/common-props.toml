@@ -4,4 +4,4 @@ hasFsVeritySignatures = true
 group = "Vanadium"
 originalPackage = "org.chromium.chrome"
 deps = ["app.vanadium.trichromelibrary", "app.vanadium.webview"]
-staticDeps = ["app.vanadium.browser >= 541411800"]
+staticDeps = ["app.vanadium.browser >= 548106100"]
