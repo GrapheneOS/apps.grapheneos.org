@@ -3,6 +3,7 @@ source = "GrapheneOS"
 hasFsVeritySignatures = true
 group = "Vanadium"
 isTopLevel = false
+showAutoUpdateNotifications = false
 isSharedLibrary = true
 noIcon = true
 staticDeps = ["app.vanadium.browser >= 548106100"]
