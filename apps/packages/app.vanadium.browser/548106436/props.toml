@@ -1,1 +1,2 @@
 channel = "beta"
+deps = ["app.vanadium.trichromelibrary 548106400", "app.vanadium.webview 548106400"]
