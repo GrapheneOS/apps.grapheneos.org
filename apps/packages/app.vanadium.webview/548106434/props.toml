@@ -1,2 +1,2 @@
 channel = "beta"
-deps = ["app.vanadium.trichromelibrary >= 548106400", "app.vanadium.browser >= 548106400"]
+deps = ["app.vanadium.trichromelibrary 548106400", "app.vanadium.browser 548106400"]
