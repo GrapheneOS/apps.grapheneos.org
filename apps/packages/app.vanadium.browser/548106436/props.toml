@@ -1,2 +1,2 @@
-channel = "stable"
+channel = "old"
 deps = ["app.vanadium.trichromelibrary 548106400", "app.vanadium.webview 548106400"]
