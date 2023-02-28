@@ -4,7 +4,7 @@ hasFsVeritySignatures = true
 group = "Vanadium"
 originalPackage = "org.chromium.chrome"
 deps = ["app.vanadium.trichromelibrary", "app.vanadium.webview"]
-staticDeps = ["app.vanadium.browser >= 548106100"]
+staticDeps = ["app.vanadium.webview >= 548106100"]
 
 description = """
 Vanadium is a privacy and security hardened variant of Chromium providing the WebView (used by other apps to render web content) and standard browser for GrapheneOS. It depends on hardening and compatibility fixes in GrapheneOS rather than reinventing the wheel inside Vanadium. For example, GrapheneOS already provides a hardened malloc implementation so there's no need for Vanadium to replace it. Similarly, it can deploy security features causing breakage on other operating systems due to the ability to fix compatibility problems in the OS.
