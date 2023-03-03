@@ -6,4 +6,4 @@ isTopLevel = false
 showAutoUpdateNotifications = false
 isSharedLibrary = true
 noIcon = true
-staticDeps = ["app.vanadium.webview >= 548106100"]
+staticDeps = ["app.vanadium.browser >= 548106100"]

@@ -6,4 +6,4 @@ noIcon = true
 isTopLevel = false
 showAutoUpdateNotifications = false
 deps = ["app.vanadium.browser", "app.vanadium.trichromelibrary"]
-staticDeps = ["app.vanadium.webview >= 548106100"]
+staticDeps = ["app.vanadium.browser >= 548106100"]
