@@ -4,9 +4,7 @@
 *.pem
 *.sig
 *.sjson
-/apps-alpha/
-/apps-beta/
-/apps-stable/
+/apps-legacy/
 /apps.0.sec
 /apps/packages/*/*/*
 !/apps/packages/*/*/*.toml

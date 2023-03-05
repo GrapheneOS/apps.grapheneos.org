@@ -14,7 +14,7 @@ channels = "stable", "beta", "alpha"
 apps = {}
 
 for channel in channels:
-    top = "apps-stable"
+    top = "apps-legacy"
     for src in sorted(os.listdir(top)):
         metadata = {"label": "", "versionCode": -1, "dependencies": [], "packages": [], "hashes": []}
 
