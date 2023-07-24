@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import base64
+import collections
 import datetime
 import hashlib
 import json
@@ -57,7 +58,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
         common_props["iconType"] = "webp"
 
     pkg_signatures = common_props["signatures"]
-    package_variants = {}
+    package_variants = collections.OrderedDict()
 
     for pkg_version in sorted(os.listdir(pkg_container_path)):
         pkg_path = os.path.join(pkg_container_path, pkg_version)
