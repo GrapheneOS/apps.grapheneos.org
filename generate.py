@@ -2,6 +2,7 @@
 
 import base64
 import collections
+import copy
 import datetime
 import hashlib
 import json
@@ -44,6 +45,38 @@ abis_dict = {
     "armeabi_v7a": "armeabi-v7a",
     "x86": "x86",
 }
+
+def remove_old_pkg_variants(orig_dict):
+    # Build a dict that maps package versions to props that determine whether this version would be overriden by a newer
+    # version (e.g. release channel, list of ABIs, dependencies, minSdk).
+    # To make sure new props are not missed. use exclusion, not inclusion filtering
+
+    dict = copy.deepcopy(orig_dict)
+
+    for pkg_props in dict.values():
+        for k in ["apkHashes", "apkSizes", "apkGzSizes", "apkBrSizes", "apks",
+                  "versionCode", "versionName", "label", "description", "releaseNotes", ]:
+            pkg_props.pop(k, None)
+
+    pkg_versions = sorted(list(orig_dict.keys()))
+
+    # build a new dict that contains only those package versions that are not overriden by newer ones
+    result = collections.OrderedDict()
+
+    for i in range(0, len(pkg_versions)):
+        pkg_version = pkg_versions[i]
+        props = dict[pkg_version]
+        is_old = False
+        for j in range(i + 1, len(dict.keys())):
+            if dict[pkg_versions[j]] == props:
+                # all relevant props are the same, pkg_version is overriden by pkg_versions[j]
+                is_old = True
+                break
+
+        if not is_old:
+            result[pkg_version] = orig_dict[pkg_version]
+
+    return result
 
 assert subprocess.call("./compress-apks") == 0
 
@@ -187,7 +220,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
 
         package_variants[pkg_version] = pkg_props
 
-    common_props["variants"] = package_variants
+    common_props["variants"] = remove_old_pkg_variants(package_variants)
     packages[pkg_name] = common_props
 
 
