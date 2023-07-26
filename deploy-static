@@ -30,11 +30,11 @@ for server in ${servers[@]}; do
     echo
 
     ssh $remote "rm -rf $target && cp -a $active $target"
-    rsync -rptcv --fsync --chmod=D755,F644 --delete static-tmp/ $remote:$target
+    rsync -rptcv --chmod=D755,F644 --delete --fsync --preallocate static-tmp/ $remote:$target
     ssh $remote "ln -snf $target /srv/apps.grapheneos.org && sync /srv/apps.grapheneos.org"
 
     echo "root $target;" > root_apps.grapheneos.org.conf
-    rsync -ptcv --fsync --chmod=644 root_apps.grapheneos.org.conf $remote:/etc/nginx/
+    rsync -ptcv --chmod=644 --fsync --preallocate root_apps.grapheneos.org.conf $remote:/etc/nginx/
     ssh $remote nginx -s reload
 
     echo
