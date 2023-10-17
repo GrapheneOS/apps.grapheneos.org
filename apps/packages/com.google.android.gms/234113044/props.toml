@@ -1,0 +1,4 @@
+channel = "alpha"
+# Apps <= 20 doesn't handle density split APKs correctly:
+# https://github.com/GrapheneOS/Apps/commit/51adcc3b57bc822b29c1fb2c203397f91512529e
+staticDeps = ["app.grapheneos.apps >= 21"]
