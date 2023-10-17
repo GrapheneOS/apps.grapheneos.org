@@ -10,5 +10,7 @@ packagesAllowedToTriggerUpdate = ["app.grapheneos.gmscompat"]
 staticDeps = ["app.grapheneos.gmscompat >= 1000"]
 
 description = """
-This is a configuration file for the sandboxed Google Play compatibility layer.
+GmsCompatConfig is a configuration file for the sandboxed Google Play compatibility layer.
+
+Sandboxed Google Play compatibility layer (GmsCompat) and GmsCompatConfig are parts of GrapheneOS.
 """
