@@ -1,0 +1,6 @@
+signatures = ["ba835740b0898dbb0ffdcb00f53f9c90d3194b64c39a5588478f9a1aad79144f"]
+source = "Google"
+
+description = """
+Image editor from the stock Pixel OS. This app is not yet available through the Play Store so we provide a mirror to offer a safe place to obtain it with automatic updates.
+"""
