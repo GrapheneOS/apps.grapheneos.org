@@ -7,5 +7,6 @@ deps = ["com.google.android.gms"]
 description = """
 Official release of Android Auto without modifications.
 <br><br>
-After installation, Android Auto has to be set up from the Settings ➔ Apps ➔ Sandboxed Google Play ➔ Android Auto screen.
+After installation, Android Auto has to be set up from the <b>Settings&nbsp;> Apps&nbsp;> Sandboxed Google
+Play&nbsp;> Android Auto</b> screen.
 """

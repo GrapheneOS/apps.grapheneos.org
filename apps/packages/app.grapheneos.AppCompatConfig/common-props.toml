@@ -9,13 +9,13 @@ noCode = true
 staticDeps = ["app.grapheneos.AppCompatConfig >= 1"]
 
 description = """
-<p>AppCompatConfig is a part of GrapheneOS. It's a file that specifies compatibility of some apps with
-the optional GrapheneOS per-app exploit protection features, which allows to automatically enable
-or disable them by default.</p>
+<p>AppCompatConfig is a part of GrapheneOS. It's a file that specifies compatibility of some apps
+with the optional GrapheneOS per-app exploit protection features, which allows to automatically
+enable or disable them by default.</p>
 
-<p>The main purpose of AppCompatConfig is to enable additional exploit protections for popular apps that
-are known to be compatible with them.</p>
+<p>The main purpose of AppCompatConfig is to enable additional exploit protections for popular apps
+that are known to be compatible with them.</p>
 
-<p>Automatic disabling of exploit protection features can be turned off via Settings ➔ Security ➔
-Automatic exploit protection compatibility mode toggle.</p>
+<p>Automatic disabling of exploit protection features can be turned off via <b>Settings&nbsp;>
+Security&nbsp;> Automatic exploit protection compatibility mode</b> toggle.</p>
 """
