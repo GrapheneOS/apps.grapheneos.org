@@ -30,7 +30,7 @@ for server in ${servers[@]}; do
     echo
 
     ssh $remote "rm -rf $target && cp -a $active $target"
-    rsync -rptcv --chmod=D755,F644 --delete --fsync --preallocate static-tmp/ $remote:$target
+    rsync -rptv --chmod=D755,F644 --delete --fsync --preallocate static-tmp/ $remote:$target
     ssh $remote "ln -snf $target /srv/apps.grapheneos.org && sync /srv/apps.grapheneos.org"
 
     echo "root $target;" > root_apps.grapheneos.org.conf
