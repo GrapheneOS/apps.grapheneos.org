@@ -3,7 +3,7 @@ source = "GrapheneOS"
 hasFsVeritySignatures = true
 group = "Vanadium"
 originalPackage = "org.chromium.chrome"
-deps = ["app.vanadium.trichromelibrary", "app.vanadium.webview"]
+deps = ["app.vanadium.trichromelibrary", "app.vanadium.webview", "app.vanadium.config"]
 staticDeps = ["app.vanadium.browser >= 548106100"]
 
 description = """
