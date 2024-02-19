@@ -4,6 +4,7 @@ hasFsVeritySignatures = true
 group = "Vanadium"
 noIcon = true
 isTopLevel = false
+isSharedLibrary = true
 showAutoUpdateNotifications = false
 deps = ["app.vanadium.webview", "app.vanadium.trichromelibrary"]
 staticDeps = ["app.vanadium.webview >= 548106100"]
