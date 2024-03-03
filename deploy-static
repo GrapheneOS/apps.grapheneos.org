@@ -34,7 +34,7 @@ for server in ${servers[@]}; do
     ssh $remote "ln -snf $target /srv/apps.grapheneos.org && sync /srv/apps.grapheneos.org"
 
     echo "root $target;" > root_apps.grapheneos.org.conf
-    rsync -ptcv --chmod=644 --fsync --preallocate root_apps.grapheneos.org.conf $remote:/etc/nginx/
+    rsync -pcv --chmod=644 --fsync --preallocate root_apps.grapheneos.org.conf $remote:/etc/nginx/
     ssh $remote nginx -s reload
 
     echo
