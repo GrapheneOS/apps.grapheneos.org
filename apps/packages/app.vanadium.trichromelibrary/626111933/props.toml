@@ -1,1 +1,2 @@
 channel = "alpha"
+staticDeps = ["app.grapheneos.apps >= 22"]
