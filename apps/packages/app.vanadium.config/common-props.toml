@@ -4,6 +4,5 @@ hasFsVeritySignatures = true
 group = "Vanadium"
 noIcon = true
 isTopLevel = false
-isSharedLibrary = true
 showAutoUpdateNotifications = false
 staticDeps = ["app.vanadium.webview >= 548106100"]
