@@ -61,7 +61,7 @@ def remove_old_pkg_variants(orig_dict):
                   "versionCode", "versionName", "label", "description", "releaseNotes", ]:
             pkg_props.pop(k, None)
 
-    pkg_versions = sorted(list(orig_dict.keys()))
+    pkg_versions = sorted(orig_dict.keys(), key=int)
 
     # build a new dict that contains only those package versions that are not overriden by newer ones
     result = collections.OrderedDict()
