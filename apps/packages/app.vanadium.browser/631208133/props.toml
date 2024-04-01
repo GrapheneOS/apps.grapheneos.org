@@ -1,2 +1,2 @@
-channel = "beta"
+channel = "stable"
 staticDeps = ["app.grapheneos.apps >= 22"]
