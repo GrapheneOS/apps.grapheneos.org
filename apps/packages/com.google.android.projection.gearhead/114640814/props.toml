@@ -1,2 +1,1 @@
-staticDeps = ["app.grapheneos.gmscompat >= 1007"]
 channel = "stable"
