@@ -3,6 +3,7 @@ source = "Google"
 
 staticDeps = ["app.grapheneos.gmscompat >= 1000"]
 deps = ["com.google.android.gsf", "com.android.vending"]
+requestUpdateOwnership = false
 
 description = """
 Official release of Google Play services without modifications. On GrapheneOS, it runs as a regular sandboxed app with no special access or privileges thanks to our sandboxed Google Play compatibility layer. The lack of any of the extensive standard privileged integration into the OS and the compatibility layer teaching it how to function that way are what makes it sandboxed Google Play.
