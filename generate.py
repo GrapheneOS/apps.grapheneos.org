@@ -266,7 +266,7 @@ while True:
     fvc_version += 1
 
 metadata = {
-    "time": int(datetime.datetime.utcnow().timestamp()),
+    "time": int(datetime.datetime.now(datetime.UTC).timestamp()),
     "packages": packages,
     "fsVerityCerts": fsverity_certs,
 }
