@@ -3,5 +3,5 @@ source = "GrapheneOS"
 hasFsVeritySignatures = true
 
 description = """
-Apps is the client for the GrapheneOS app repository. It's included in GrapheneOS but can also be used on other Android 12+ operating systems.
+App Store is the client for the GrapheneOS app repository. It's included in GrapheneOS but can also be used on other Android 12+ operating systems.
 """
