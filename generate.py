@@ -130,7 +130,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             kv = shlex.split(line.decode())
             if kv[0].startswith("application-label:"):
                 pkg_props["label"] = kv[0].split(":")[1]
-            elif kv[0].startswith("sdkVersion"):
+            elif kv[0].startswith("minSdkVersion"):
                 pkg_props["minSdk"] = int(kv[0].split(":")[1])
             elif kv[0].startswith("native-code"):
                 abis = kv[1:]
