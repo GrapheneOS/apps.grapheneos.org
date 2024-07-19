@@ -1,0 +1,11 @@
+signatures = ["067a40c4193aad51ac87f9ddfdebb15e24a1850babfa4821c28c5c25c3fdc071"]
+source = "Mirror"
+
+staticDeps = ["app.grapheneos.apps >= 24"]
+optOutOfBulkUpdates = true
+requestUpdateOwnership = false
+
+# copied from https://accrescent.app/
+description = """
+Accrescent is a private and secure Android app store built with modern features in mind. It aims to provide a developer-friendly platform and pleasant user experience while enforcing modern security and privacy practices and offering robust validity guarantees for installed apps.
+"""
