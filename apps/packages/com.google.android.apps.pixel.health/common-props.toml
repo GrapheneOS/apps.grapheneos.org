@@ -1,0 +1,6 @@
+signatures = ["295499d8d0e93b7ed64f90e8cddffc12e3be23d8806f54e05d1abf415c37f5ba"]
+source = "Google"
+
+requiredSystemFeatures = ["com.google.android.feature.FIR.PROXIMITY"]
+# requiredSystemFeatures property is supported since version 23
+staticDeps = ["app.grapheneos.apps >= 23"]
