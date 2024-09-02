@@ -146,6 +146,8 @@ for pkg_name in sorted(os.listdir(packages_dir)):
 
         assert pkg_props["channel"] in ["alpha", "beta", "stable", "old"]
 
+        has_v4_sigs = None
+
         for apk_name in sorted(filter(lambda n: n.endswith(".apk"), os.listdir(pkg_path))):
             apk_path = os.path.join(pkg_path, apk_name)
 
@@ -154,6 +156,16 @@ for pkg_name in sorted(os.listdir(packages_dir)):
 
             assert os.path.getmtime(apk_path) == os.path.getmtime(apk_gz_path)
             assert os.path.getmtime(apk_path) == os.path.getmtime(apk_br_path)
+
+            if os.path.isfile(apk_path + ".idsig"):
+                if has_v4_sigs is False:
+                    # at least one previously encountered APK didn't have v4 sig
+                    raise Exception("one or more APK is missing a v4 signature: " + pkg_path)
+                has_v4_sigs = True
+            else:
+                if has_v4_sigs:
+                    raise Exception("v4 signature is missing for " + apk_path)
+                has_v4_sigs = False
 
             apk_hash_path = apk_path + ".sha256"
 
@@ -197,6 +209,9 @@ for pkg_name in sorted(os.listdir(packages_dir)):
                 maybe_abi = name_parts[len(name_parts) - 2]
                 if maybe_abi in abis_dict:
                     pkg_abis.add(abis_dict[maybe_abi])
+
+        if has_v4_sigs:
+            pkg_props["hasV4Signatures"] = True
 
         if len(pkg_abis) != 0:
             pkg_props["abis"] = list(pkg_abis)

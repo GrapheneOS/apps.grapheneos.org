@@ -54,5 +54,5 @@ maybe_zopfli() {
 
 export -f maybe_zopfli
 
-find "apps/packages" -regex '.+\.apk' |
+find "apps/packages" -regex '.+\.\(apk\|apk\.idsig\)' |
     parallel -q ::: maybe_brotli maybe_zopfli :::: -
