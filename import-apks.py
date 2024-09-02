@@ -45,3 +45,10 @@ for i in range(1, len(sys.argv)):
         shutil.copyfile(path, dest_path)
         print("copied to " + dest_path)
 
+    v4_sig_path = path + ".idsig"
+    if os.path.isfile(v4_sig_path):
+        if is_split:
+            shutil.copy(v4_sig_path, dest_dir)
+        else:
+            shutil.copyfile(v4_sig_path, dest_dir + "/base.apk.idsig")
+
