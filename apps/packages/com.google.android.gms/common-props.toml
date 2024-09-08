@@ -1,4 +1,4 @@
-signatures = ["7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053"]
+signatures = ["7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053", "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402"]
 source = "Google"
 
 staticDeps = ["app.grapheneos.gmscompat >= 1000"]
