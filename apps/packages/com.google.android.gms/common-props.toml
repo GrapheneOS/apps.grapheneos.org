@@ -2,6 +2,10 @@ signatures = ["7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053"
 source = "Google"
 
 staticDeps = ["app.grapheneos.gmscompat >= 1000"]
+# GSF is not needed on SDK 35+, it's excluded there by "android <= 34" staticDep.
+# SkipIfMissing dependency flag makes App Store ignore GSF dependency on SDK 35+.
+deps2 = ["com.google.android.gsf 0 SkipIfMissing", "com.android.vending"]
+# deps property is ignored by App Store versions that support the new deps2 property
 deps = ["com.google.android.gsf", "com.android.vending"]
 requestUpdateOwnership = false
 
