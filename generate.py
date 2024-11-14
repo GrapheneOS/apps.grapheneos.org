@@ -112,6 +112,11 @@ for pkg_name in sorted(os.listdir(packages_dir)):
         if (base_apk_signature not in pkg_signatures):
             raise Exception("unknown signature of " + base_apk_path + ", SHA-256: " + base_apk_signature)
 
+        # This is needed to prevent App Store from attempting to install minSdk 31 version of this package on SDK 35+
+        # devices, which have a separate minSdk 35+ package variant
+        if pkg_name == "com.google.android.gms" and base_apk_signature == "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053":
+            pkg_props["maxSdk"] = 34
+
         badging = subprocess.check_output(["aapt2", "dump", "badging", base_apk_path])
 
         lines = badging.split(b"\n")
@@ -219,7 +224,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
         pkg_msg = "channel: " + pkg_props["channel"] + ", minSdk: " + str(pkg_props["minSdk"])
         maxSdk = pkg_props.get("maxSdk")
         if maxSdk != None:
-            pkg_msg += ", maxSdk: " + maxSdk
+            pkg_msg += ", maxSdk: " + str(maxSdk)
         if len(pkg_abis) != 0:
             pkg_msg += "\nabis: " + ", ".join(pkg_abis)
         staticDeps = pkg_props.get("staticDeps")
