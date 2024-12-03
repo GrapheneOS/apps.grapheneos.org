@@ -5,4 +5,4 @@ group = "Vanadium"
 noIcon = true
 isTopLevel = false
 showAutoUpdateNotifications = false
-staticDeps = ["app.vanadium.webview >= 548106100"]
+staticDeps = ["app.vanadium.webview >= 548106100", "app.vanadium.config >= 54"]
