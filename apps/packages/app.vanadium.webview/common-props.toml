@@ -4,5 +4,6 @@ hasFsVeritySignatures = true
 group = "Vanadium"
 noIcon = true
 isTopLevel = false
-deps = ["app.vanadium.trichromelibrary", "app.vanadium.config"]
+deps2 = ["app.vanadium.trichromelibrary", "app.vanadium.config 0 SkipIfMissing"]
+deps = ["app.vanadium.trichromelibrary"]
 staticDeps = ["app.vanadium.webview >= 548106100"]
