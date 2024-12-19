@@ -1,2 +1,2 @@
-channel = "alpha"
+channel = "beta"
 staticDeps = ["app.vanadium.webview >= 548106100", "app.vanadium.config >= 54"]
