@@ -109,7 +109,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
         assert os.path.isfile(base_apk_path)
 
         base_apk_signature = load_signature(base_apk_path)
-        if (base_apk_signature not in pkg_signatures):
+        if (base_apk_signature.lower() not in [signature.lower() for signature in pkg_signatures]):
             raise Exception("unknown signature of " + base_apk_path + ", SHA-256: " + base_apk_signature)
 
         # This is needed to prevent App Store from attempting to install minSdk 31 version of this package on SDK 35+
