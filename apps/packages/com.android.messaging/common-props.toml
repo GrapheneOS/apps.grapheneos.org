@@ -1,0 +1,6 @@
+signatures = ["f79e5f0ec0a0855efd2027e05eb9ec9c196d5d047940be603576e530867c3845"]
+source = "GrapheneOS"
+hasFsVeritySignatures = true
+staticDeps = ["com.android.messaging >= 10001044"]
+
+description = """GrapheneOS fork of the AOSP Messaging app."""
