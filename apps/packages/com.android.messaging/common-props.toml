@@ -3,4 +3,4 @@ source = "GrapheneOS"
 hasFsVeritySignatures = true
 staticDeps = ["com.android.messaging >= 10001044"]
 
-description = """SMS/MMS app providing compatibility with non-private carrier-based messaging. Use a secure messaging app such as Molly/Signal or SimpleX for privacy instead. This is a GrapheneOS fork of the Android Open Source Project Messaging app and still uses the AOSP package name for backwards compatibility."""
+description = """SMS/MMS app providing compatibility with non-private carrier-based messaging. Use a secure messaging app such as Molly/Signal for privacy instead. This is a GrapheneOS fork of the Android Open Source Project Messaging app and still uses the AOSP package name for backwards compatibility."""
