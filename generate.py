@@ -319,4 +319,3 @@ while True:
         f.write("\n" + sig + "\n")
 
     key_version += 1
-
