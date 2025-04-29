@@ -2,7 +2,7 @@
 
 set -o errexit -o nounset -o pipefail
 
-APPS=(com.android.vending com.google.android.gms com.google.android.gsf)
+APPS=(com.android.vending com.google.android.gms)
 
 rm -rf gmscompat-apps
 mkdir gmscompat-apps
