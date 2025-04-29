@@ -1,0 +1,9 @@
+#!/bin/bash -x
+
+set -o errexit -o nounset -o pipefail
+
+adb shell settings delete global gmscompat_bypass_sys_component_update_stub
+adb shell settings delete global gmscompat_play_store_fetch_all_locales
+adb shell settings delete global gmscompat_play_store_can_install_com.google.android.gms
+adb shell settings delete global gmscompat_play_store_can_install_com.google.android.projection.gearhead
+adb shell settings delete global gmscompat_play_store_can_install_com.android.vending
