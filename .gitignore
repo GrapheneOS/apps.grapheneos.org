@@ -9,8 +9,7 @@
 /apps/packages/*/*/*
 !/apps/packages/*/*/*.toml
 /download/
-/extracted-apps-old/
-/extracted-apps/
+/gmscompat-apps/
 /lock
 /root_apps.grapheneos.org.conf
 /static-tmp/
