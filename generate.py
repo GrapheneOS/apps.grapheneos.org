@@ -11,13 +11,13 @@ import re
 import shlex
 import shutil
 import subprocess
-import tomli
+import tomllib
 
 def load_props(dir, name):
     path = os.path.join(dir, name + ".toml")
     if os.path.isfile(path):
         with open(path, "rb") as f:
-            return tomli.load(f)
+            return tomllib.load(f)
     else:
         return {}
 
