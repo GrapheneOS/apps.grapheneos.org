@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -o errexit -o nounset -o pipefail
+set -o errexit -o nounset -o pipefail -x
 
 adb shell settings put global gmscompat_bypass_sys_component_update_stub 1
 adb shell settings put global gmscompat_play_store_fetch_all_locales .+
