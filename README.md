@@ -35,6 +35,6 @@ the fs-verity key. You can also sign them manually:
 
     fsverity sign app-release.apk app-release.apk.fsv_sig --key fsverity_private_key.0.pem --cert fsverity_cert.0.pem
 
-For Android 15, GrapheneOS uses APK signature scheme v4 signed with the same
-key as the APK instead of a separate fs-verity key. You don't need the
+For Android 15 and later, GrapheneOS uses APK signature scheme v4 signed with
+the same key as the APK instead of a separate fs-verity key. You don't need the
 fs-verity setup anymore if you only support current versions of GrapheneOS.
