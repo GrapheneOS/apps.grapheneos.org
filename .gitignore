@@ -5,6 +5,7 @@
 *.sig
 *.sjson
 /apps-legacy/
+/apps.0.pub
 /apps.0.sec
 /apps/packages/*/*/*
 !/apps/packages/*/*/*.toml
@@ -13,4 +14,3 @@
 /lock
 /root_apps.grapheneos.org.conf
 /static-tmp/
-apps.0.pub
