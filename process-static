@@ -18,6 +18,10 @@ rm -rf static-tmp
 cp -a static static-tmp
 cp -a apps/* static-tmp
 
+# drop unused sha256 and toml files while preserving directory timestamps
+find static-tmp -regextype posix-extended -regex '.*\.(sha256|toml)' -delete
+rsync -at --exclude '*.sha256' --exclude '*.toml' apps/ static-tmp
+
 zopfli_preserve_time() {
     zopfli "$1"
     touch -r "$1" "$1.gz"
