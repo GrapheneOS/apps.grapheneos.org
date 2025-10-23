@@ -34,7 +34,7 @@ for i in range(1, len(sys.argv)):
 
     if not os.path.isdir(dest_dir):
         os.makedirs(dest_dir)
-        with open(dest_dir + "/props.toml", "w") as f:
+        with open(dest_dir + "/channel.toml", "w") as f:
             f.write("channel = \"alpha\"\n")
 
     if is_split:
