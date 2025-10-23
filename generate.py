@@ -146,6 +146,9 @@ for pkg_name in sorted(os.listdir(packages_dir)):
 
         assert pkg_props.get("minSdk") != None
 
+        for key,value in load_props(pkg_path, "channel").items():
+            pkg_props[key] = value
+
         for key,value in load_props(pkg_path, "props").items():
             pkg_props[key] = value
 
