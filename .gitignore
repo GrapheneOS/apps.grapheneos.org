@@ -12,5 +12,6 @@
 /download/
 /gmscompat-apps/
 /lock
-/root_apps.grapheneos.org.conf
+/logs/
+/*.root_apps.grapheneos.org.conf
 /static-tmp/

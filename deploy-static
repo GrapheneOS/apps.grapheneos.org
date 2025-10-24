@@ -13,16 +13,19 @@ fi
 
 servers=({0..3}.releases.grapheneos.org)
 
-for server in ${servers[@]}; do
+deploy() {
+    set -o errexit -o nounset -o pipefail
+
+    local server=$1
     echo $server
 
-    remote=root@$server
-    active=$(ssh $remote readlink /srv/apps.grapheneos.org)
+    local remote=root@$server
+    local active=$(ssh $remote readlink /srv/apps.grapheneos.org)
 
     if [[ $active = /srv/apps.grapheneos.org_a ]]; then
-        target=/srv/apps.grapheneos.org_b
+        local target=/srv/apps.grapheneos.org_b
     else
-        target=/srv/apps.grapheneos.org_a
+        local target=/srv/apps.grapheneos.org_a
     fi
 
     echo active is $active
@@ -33,12 +36,17 @@ for server in ${servers[@]}; do
     rsync -rptv --chmod=D755,F644 --progress --delete --fsync --preallocate static-tmp/ $remote:$target
     ssh $remote "ln -snf $target /srv/apps.grapheneos.org && sync /srv/apps.grapheneos.org"
 
-    echo "root $target;" > root_apps.grapheneos.org.conf
-    rsync -pcv --chmod=644 --fsync --preallocate root_apps.grapheneos.org.conf $remote:/etc/nginx/
-    rm root_apps.grapheneos.org.conf
+    echo "root $target;" > $server.root_apps.grapheneos.org.conf
+    rsync -pcv --chmod=644 --fsync --preallocate $server.root_apps.grapheneos.org.conf $remote:/etc/nginx/root_apps.grapheneos.org.conf
+    rm $server.root_apps.grapheneos.org.conf
     ssh $remote nginx -s reload
 
     echo
     echo active is now $target
     echo
-done
+}
+
+rm -f logs/*.log
+export -f deploy
+parallel "deploy {} >logs/{}.log 2>&1" ::: "${servers[@]}"
+tail -n +1 logs/*.log
