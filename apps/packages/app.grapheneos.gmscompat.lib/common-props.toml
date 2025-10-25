@@ -2,6 +2,8 @@ signatures = ["cb3687797edbb8a28631eb725b650a8b4a5879ea47e6220a35cef157c9829429"
 source = "GrapheneOS"
 hasFsVeritySignatures = true
 
+isTopLevel = false
+
 description = """
 GmsCompatLib is a part of the GrapheneOS sandboxed Google Play compatibility layer.
 """
