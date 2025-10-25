@@ -1,0 +1,1 @@
+requiredSystemFeatures = ["grapheneos.version >= 2025102300"]
