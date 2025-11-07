@@ -11,6 +11,7 @@ import re
 import shlex
 import shutil
 import subprocess
+import sys
 import tomli
 
 def load_props(dir, name):
@@ -300,6 +301,9 @@ metadata = {
 }
 
 metadata_prefix = "apps/metadata.1"
+if len(sys.argv) > 1 and sys.argv[1] == "staging":
+    metadata_prefix = "apps/staging-metadata.1"
+
 metadata_json = metadata_prefix + ".json"
 
 with open(metadata_json, "w") as f:
