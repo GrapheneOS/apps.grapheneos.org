@@ -39,7 +39,7 @@ deploy() {
     echo "root $target;" > $server.root_apps.grapheneos.org.conf
     rsync -pcv --chmod=644 --fsync --preallocate $server.root_apps.grapheneos.org.conf $remote:/etc/nginx/root_apps.grapheneos.org.conf
     rm $server.root_apps.grapheneos.org.conf
-    ssh $remote nginx -s reload
+    ssh $remote systemctl reload nginx
 
     echo
     echo active is now $target
