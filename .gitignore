@@ -4,12 +4,10 @@
 *.pem
 *.sig
 *.sjson
-/apps-legacy/
 /apps.0.pub
 /apps.0.sec
 /apps/packages/*/*/*
 !/apps/packages/*/*/*.toml
-/download/
 /gmscompat-apps/
 /lock
 /logs/
