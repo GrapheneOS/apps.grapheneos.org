@@ -26,7 +26,7 @@ def load_signature(apk_path):
     apksigner_output = subprocess.check_output(["apksigner", "verify", "--print-certs", "--verbose", apk_path])
     sig_hash = None
     for line in apksigner_output.split(b'\n'):
-        split = re.split(r"^(?:V\d\.*\d* )?Signer(?: .+|:) certificate SHA-256 digest: ", line.decode())
+        split = re.split(r"^V[^\s]+ Signer: certificate SHA-256 digest: ", line.decode())
         if (len(split) == 2):
             if (sig_hash is not None):
                 if ("maxSdkVersion=" in line.decode()):
