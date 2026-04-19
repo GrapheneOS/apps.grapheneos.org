@@ -228,7 +228,7 @@ for pkg_name in sorted(os.listdir(packages_dir)):
             pkg_props["hasV4Signatures"] = True
 
         if len(pkg_abis) != 0:
-            pkg_props["abis"] = list(pkg_abis)
+            pkg_props["abis"] = sorted(pkg_abis)
 
         pkg_msg = "channel: " + pkg_props["channel"] + ", minSdk: " + str(pkg_props["minSdk"])
         maxSdk = pkg_props.get("maxSdk")
