@@ -1,0 +1,12 @@
+signatures = ["e4ed212b02b55bc33464938df68d04f60dff04dd3ac982b8b8240441e05f1b2f"]
+source = "GrapheneOS"
+hasFsVeritySignatures = true
+
+description = """
+Speech Services provides fast, efficient, and high-quality text-to-speech using state-of-the-art
+models running completely on-device.
+
+It uses our fork of Matcha-TTS with major speed and efficiency improvements alongside a phonemizer
+written in Kotlin, based on the Misaki phonemizer and the Apache OpenNLP library for text
+preprocessing.
+"""
