@@ -55,9 +55,9 @@ def remove_old_pkg_variants(orig_dict):
     # version (e.g. release channel, list of ABIs, dependencies, minSdk).
     # To make sure new props are not missed. use exclusion, not inclusion filtering
 
-    dict = copy.deepcopy(orig_dict)
+    copy_dict = copy.deepcopy(orig_dict)
 
-    for pkg_props in dict.values():
+    for pkg_props in copy_dict.values():
         for k in ["apkHashes", "apkSizes", "apkGzSizes", "apkBrSizes", "apks",
                   "versionCode", "versionName", "label", "description", "releaseNotes", ]:
             pkg_props.pop(k, None)
@@ -69,10 +69,10 @@ def remove_old_pkg_variants(orig_dict):
 
     for i in range(0, len(pkg_versions)):
         pkg_version = pkg_versions[i]
-        props = dict[pkg_version]
+        props = copy_dict[pkg_version]
         is_old = False
-        for j in range(i + 1, len(dict.keys())):
-            if dict[pkg_versions[j]] == props:
+        for j in range(i + 1, len(copy_dict.keys())):
+            if copy_dict[pkg_versions[j]] == props:
                 # all relevant props are the same, pkg_version is overriden by pkg_versions[j]
                 is_old = True
                 break
