@@ -20,7 +20,8 @@ deploy() {
     echo $server
 
     local remote=root@$server
-    local active=$(ssh $remote readlink /srv/apps.grapheneos.org)
+    local active
+    active=$(ssh $remote readlink /srv/apps.grapheneos.org)
 
     if [[ $active = /srv/apps.grapheneos.org_a ]]; then
         local target=/srv/apps.grapheneos.org_b
