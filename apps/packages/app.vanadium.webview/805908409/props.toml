@@ -1,0 +1,2 @@
+deps2 = ["app.vanadium.config 0 SkipIfMissing"]
+deps = []

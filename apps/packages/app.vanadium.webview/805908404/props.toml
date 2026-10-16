@@ -1,0 +1,3 @@
+deps2 = ["app.vanadium.config 0 SkipIfMissing"]
+deps = []
+staticDeps = ["app.grapheneos.apps >= 34"]
