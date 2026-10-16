@@ -7,11 +7,13 @@ import shutil
 import subprocess
 import sys
 
-for i in range(1, len(sys.argv)):
-    path = sys.argv[i]
-    print("\nimporting " + path)
+from os import path
 
-    badging = subprocess.check_output(["aapt2", "dump", "badging", path])
+for i in range(1, len(sys.argv)):
+    src = sys.argv[i]
+    print("\nimporting " + src)
+
+    badging = subprocess.check_output(["aapt2", "dump", "badging", src])
     lines = badging.split(b"\n")
 
     version = None
@@ -32,29 +34,27 @@ for i in range(1, len(sys.argv)):
 
     dest_dir = "apps/packages/" + pkg_name + "/" + version
 
-    if not os.path.isdir(dest_dir):
+    if not path.isdir(dest_dir):
         os.makedirs(dest_dir)
         with open(dest_dir + "/channel.toml", "w") as f:
             f.write("channel = \"alpha\"\n")
 
-    if is_split:
-        shutil.copy(path, dest_dir)
-        print("copied to " + dest_dir)
-    else:
-        dest_path = dest_dir + "/base.apk"
-        shutil.copyfile(path, dest_path)
-        print("copied to " + dest_path)
+    dest_path = path.join(dest_dir, path.basename(src) if is_split else "base.apk")
+    if path.exists(dest_path):
+        raise Exception(dest_path + " already exists. Make sure to delete its caches and deltas before replacing it.")
+    shutil.copyfile(src, dest_path)
+    print("copied to " + dest_path)
 
-    v4_sig_path = path + ".idsig"
-    if os.path.isfile(v4_sig_path):
+    v4_sig_path = src + ".idsig"
+    if path.isfile(v4_sig_path):
         if is_split:
             shutil.copy(v4_sig_path, dest_dir)
         else:
             shutil.copyfile(v4_sig_path, dest_dir + "/base.apk.idsig")
 
     if not is_split:
-        props_path = path + ".props.toml"
-        if os.path.isfile(props_path):
+        props_path = src + ".props.toml"
+        if path.isfile(props_path):
             dest_props_path = dest_dir + "/props.toml"
             shutil.copyfile(props_path, dest_props_path)
             print("copied " + props_path + " to " + dest_props_path)

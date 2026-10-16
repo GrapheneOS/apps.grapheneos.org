@@ -28,8 +28,6 @@ arbitrary name representing your project (not used for anything):
     openssl req -newkey rsa:4096 -sha512 -noenc -keyout fsverity_private_key.0.pem -x509 -out fsverity_cert.0.pem -days 10000 -subj /CN=GrapheneOS/
     openssl x509 -in fsverity_cert.0.pem -out fsverity_cert.0.der -outform der
 
-The `0` refers to the generation of the key. This is used for key rotation.
-
 The `generate.py` script will automatically sign all the published apps with
 the fs-verity key. You can also sign them manually:
 
