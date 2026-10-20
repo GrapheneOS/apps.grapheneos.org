@@ -1,1 +1,1 @@
-staticDeps = ["app.grapheneos.gmscompat >= 1010"]
+staticDeps = ["app.grapheneos.gmscompat >= 1011"]
