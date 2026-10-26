@@ -1,0 +1,6 @@
+signatures = ["798c9bf8f7f5498dbe1d7ffcf2f1d0fd548cff0674021ea1a415a9596f55c28c"]
+source = "GrapheneOS"
+hasFsVeritySignatures = true
+requiredSystemFeatures = ["grapheneos.version >= 2026101600"]
+
+description = """GrapheneOS screen reader based on the limited open source releases of TalkBack."""
